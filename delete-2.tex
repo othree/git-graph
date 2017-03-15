@@ -1,0 +1,26 @@
+\documentclass[preview]{standalone}
+\usepackage{gitdags}
+\tikzgraphsset{%
+  nudge/.style={/tikz/shift={#1}},
+  nudge down/.style={nudge=(270:#1)},
+  nudge down/.default=1
+}
+
+%\usepackage{fontspec}
+
+%\setmainfont[ExternalLocation=/Users/othree/tmp-projects/git-graph/]{"EVA-Matisse_Standard.ttf"}
+
+\begin{document}
+    \centering
+    \begin{tikzpicture}
+      % Commit DAG
+      \gitDAG[grow right sep = 2em]{
+        0 -- 1 -- 2 -- 3 -- 4 -- {[nudge down]{[nodes=unreachable] {A}}}
+      };
+      \gitbranch
+        {master}     % node name and text 
+        {above=of 4} % node placement
+        {4}          % target
+      \end{tikzpicture}
+
+\end{document}
