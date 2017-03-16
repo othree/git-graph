@@ -15,24 +15,22 @@
     \begin{tikzpicture}
       % Commit DAG
       \gitDAG[grow right sep = 2em]{
-        0 -- 1 -- 2 -- 3 -- 4 -- {[nudge down] {A -- B}}
+        0 --{
+           1 -- 2 -- 3 -- 4,
+           A -- B -- C
+        }
       };
       \gitbranch
         {master}     % node name and text 
         {above=of 4} % node placement
         {4}          % target
-      \gitbranch
-        {for-fast-forward}     % node name and text 
-        {above=of B} % node placement
-        {B}          % target
-      \gitremotebranch
-        [origin-for-fast-forward] % node name
-        {origin/for-fast-forward} % node text
-        {below=of A} % node placement
-        {A} % target
       \gitHEAD
-        {above=of for-fast-forward} % node placement
-        {for-fast-forward} 
+        {above=of master} % node placement
+        {master} 
+      \gitbranch
+        {branch}     % node name and text 
+        {below=of C} % node placement
+        {C}          % target
       \end{tikzpicture}
 
 \end{document}
