@@ -1,0 +1,54 @@
+\documentclass{article}
+
+\usepackage{subcaption}
+\usepackage{gitdags}
+
+\begin{document}
+
+\begin{figure}
+
+  \begin{subfigure}[b]{\textwidth}
+    \centering
+    \begin{tikzpicture}
+      % Commit DAG
+      \gitDAG[grow right sep = 2em]{
+        9189e99 -- {
+         {
+            {
+              { 4ad9fb3 [fill=solarized-blue!20] -- b87d53c [fill=solarized-red!20] -- a89feb },
+              { 3ad5ed5 -- THIS },
+            } --  3a45f5,
+          } -- 6d8b67,
+          { a37d92c [fill=solarized-red!20] -- 2bd8ea3 [fill=solarized-red!20] },
+        } -- 589af1,
+        3ad5ed5 -- 3a45f5
+      };
+      % Branch
+      \gitbranch
+        {master}     % node name and text 
+        {above=of 3a45f5} % node placement
+        {3a45f5}          % target
+      % Remote branch
+      \gitremotebranch
+        [origmaster]    % node name
+        {origin/master} % node text
+        {above=of 4ad9fb3}    % node placement
+        {4ad9fb3}             % target
+      % Remote branch
+      \gitremotebranch
+        [origfeature1]    % node name
+        {origin/feature/commonName} % node text
+        {above=of 589af1}    % node placement
+        {589af1}             % target
+      % HEAD reference
+      \gitHEAD
+        {above=of master} % node placement
+        {master}          % target
+    \end{tikzpicture}
+    \subcaption{After rebase}
+  \end{subfigure}
+
+  \caption{Demonstrating a typical \texttt{rebase}}
+\end{figure}
+
+\end{document}
