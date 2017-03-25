@@ -5,4 +5,5 @@ Generate
 --------
 
     ls *.tex | xargs -I {} pdflatex {}
+    ls *.pdf | xargs -I {} pdfcrop {}
     ls *.pdf | xargs -I {} pdf2svg {} {}.svg
